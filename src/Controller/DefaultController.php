@@ -13,7 +13,7 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-        $cars = $this->getCarRepository()->findAll();
+        $cars = $this->getCarRepository()->findCarsWithDetails();
 
         return $this->render('index.html.twig', [
             'cars' => $cars
