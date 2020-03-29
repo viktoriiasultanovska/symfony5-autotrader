@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} The Best Cars in the Internet! {% endblock %}
+{% block body %}
+    <div id="wrapper">
+        <div id="container" class="container">
+            <div id="welcome">
+                <h1>{{ car.model.name }}</h1>
+                <p>{{ car.vendor.name }}</p>
+                <p>{{ car.price }}</p>
+                <p>{{ car.year }}</p>
+            </div>
+            <a href="{{ url('offer') }}">Back</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} The Best Cars in the Internet! {% endblock %}
+{% block body %}
+    <div id="wrapper">
+        <div id="container" class="container">
+            <div id="welcome">
+                <h1>Offer</h1>
+                <table class="table">
+                    <thead>
+                    <th>Vendor</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                    </thead>
+                    <tbody>
+                    {% for car in cars %}
+                        <tr>
+                            <td>{{ car.vendor.name }}</td>
+                            <td>{{ car.model.name }}</td>
+                            <td><a href="{{ url('show_car', {id: car.id}) }}">Show Details</a></td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
