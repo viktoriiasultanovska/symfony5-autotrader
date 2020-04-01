@@ -25,15 +25,18 @@ class Model
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Car", mappedBy="model")
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="model")
      */
     private $cars;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->cars = new ArrayCollection();
+        $this->cars = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -80,5 +83,10 @@ class Model
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

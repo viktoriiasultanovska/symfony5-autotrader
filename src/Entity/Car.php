@@ -19,14 +19,14 @@ class Car
     /**
      * @var Model
      *
-     * @ORM\ManyToOne(targetEntity="Model", inversedBy="cars")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Model", inversedBy="cars")
      */
     private $model;
 
     /**
      * @var Vendor
      *
-     * @ORM\ManyToOne(targetEntity="Vendor", inversedBy="cars")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Vendor", inversedBy="cars")
      */
     private $vendor;
 
@@ -60,7 +60,14 @@ class Car
         return $this->model;
     }
 
-    public function setModel(string $model): self
+    /**
+     * Set model
+     *
+     * @param Model $model
+     *
+     * @return Car
+     */
+    public function setModel(Model $model = null)
     {
         $this->model = $model;
 
@@ -72,23 +79,32 @@ class Car
         return $this->vendor;
     }
 
-    public function setVendor(string $vendor): self
+    /**
+     * Set vendor
+     *
+     * @param Vendor $model
+     *
+     * @return Car
+     */
+    public function setVendor(Vendor $vendor): self
     {
         $this->vendor = $vendor;
 
         return $this;
     }
+
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDescription(): ?string
+    public function getDescription()
     {
         return $this->description;
     }
+
     /**
-     * @param mixed $description
+     * @param string $description
      */
-    public function setDescription($description): self
+    public function setDescription($description)
     {
         $this->description = $description;
     }

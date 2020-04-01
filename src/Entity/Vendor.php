@@ -25,14 +25,19 @@ class Vendor
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="Car", mappedBy="vendor")
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Car", mappedBy="vendor")
      */
     private $cars;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->cars = new ArrayCollection();
+        $this->cars = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -80,5 +85,10 @@ class Vendor
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
