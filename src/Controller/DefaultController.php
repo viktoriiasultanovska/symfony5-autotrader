@@ -25,7 +25,7 @@ class DefaultController extends AbstractController
      */
     public function show($id)
     {
-        $car = $this->getCarRepository()->find($id);
+        $car = $this->getCarRepository()->findCarsWithDetailsById($id);
 
         if (!$car) {
             throw $this->createNotFoundException(
