@@ -52,7 +52,7 @@ class CarRepository extends ServiceEntityRepository
     public function findCarsWithDetails()
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->select('c');
+        $qb->select('c, vendor, model');
         $qb->join('c.vendor', 'vendor');
         $qb->join('c.model', 'model');
 
