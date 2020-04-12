@@ -51,8 +51,7 @@ class Car
     private $description;
 
     /**
-     * @var boolean
-     * @ORM\Column(name="promote", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     private $promote;
 
@@ -150,17 +149,14 @@ class Car
 
         return $this;
     }
-    /**
-     * @return bool
-     */
-    public function isPromote(): bool
+
+    public function getPromote()
     {
         return $this->promote;
     }
-    /**
-     * @param bool $promote
-     */
-    public function setPromote(bool $promote): void
+
+
+    public function setPromote($promote)
     {
         $this->promote = $promote;
     }

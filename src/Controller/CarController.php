@@ -36,6 +36,9 @@ class CarController extends AbstractController
     /**
      * @Route("/", name="car_index", methods={"GET"})
      * @Template()
+     * @param CarRepository $carRepository
+     *
+     * @return array
      */
     public function index(CarRepository $carRepository): array
     {

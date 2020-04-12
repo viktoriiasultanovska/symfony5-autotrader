@@ -7,6 +7,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class CarType
+ * @package App\Form
+ */
 class CarType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -18,7 +22,7 @@ class CarType extends AbstractType
             ->add('description')
             ->add('model')
             ->add('vendor')
-        ;
+            ->add('promote');
     }
 
     public function configureOptions(OptionsResolver $resolver)
