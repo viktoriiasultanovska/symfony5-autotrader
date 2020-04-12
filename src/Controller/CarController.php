@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Car;
 use App\Form\CarType;
 use App\Repository\CarRepository;
+use App\Service\DataChecker;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +18,21 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CarController extends AbstractController
 {
+
+    /**
+     * @var DataChecker
+     */
+    private $dataChecker;
+
+    /**
+     * CarController constructor.
+     *
+     * @param DataChecker $dataChecker
+     */
+    public function __construct(DataChecker $dataChecker)
+    {
+        $this->dataChecker = $dataChecker;
+    }
     /**
      * @Route("/", name="car_index", methods={"GET"})
      * @Template()
@@ -28,7 +45,31 @@ class CarController extends AbstractController
     }
 
     /**
+     * @param $id
+     * @Route("/promote/{id}", name="car_promote", methods={"GET"})
+     * @Template()
+     *
+     * @return RedirectResponse
+     */
+    public function promote($id): RedirectResponse
+    {
+        $car = $this->getCarRepository()->find($id);
+        $result = $this->dataChecker->checkCar($car);
+        if ($result) {
+            $this->addFlash('success', 'Car promoted');
+        } else {
+            $this->addFlash('warning', 'Car not applicable');
+        }
+
+
+        return $this->redirectToRoute('car_index');
+    }
+
+    /**
      * @Route("/new", name="car_new", methods={"GET","POST"})
+     * @param Request $request
+     *
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -52,6 +93,9 @@ class CarController extends AbstractController
 
     /**
      * @Route("/{id}", name="car_show", methods={"GET"})
+     * @param Car $car
+     *
+     * @return Response
      */
     public function show(Car $car): Response
     {
@@ -62,6 +106,10 @@ class CarController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="car_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Car $car
+     *
+     * @return Response
      */
     public function edit(Request $request, Car $car): Response
     {
@@ -82,6 +130,10 @@ class CarController extends AbstractController
 
     /**
      * @Route("/{id}", name="car_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Car $car
+     *
+     * @return Response
      */
     public function delete(Request $request, Car $car): Response
     {
@@ -94,5 +146,11 @@ class CarController extends AbstractController
         }
 
         return $this->redirectToRoute('car_index');
+    }
+
+    protected function getCarRepository()
+    {
+        return $this->getDoctrine()
+            ->getRepository(Car::class);
     }
 }

@@ -50,7 +50,14 @@ class MenuBuilder
             ]
         );
 
-        // ... add more children
+        // Admin
+        $menu->addChild('Manage Cars',
+            [
+                'route'      => 'car_index',
+                'attributes' => ['class' => 'nav-item'],
+                'linkAttributes' => ['class' => 'nav-link']
+            ]
+        );
 
         return $menu;
     }
