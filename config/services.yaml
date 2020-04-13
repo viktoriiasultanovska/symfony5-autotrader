@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     require_images_to_promote_car: false
+    photos_directory: '%kernel.project_dir%/public/uploads/car'
 
 services:
     # default configuration for services in *this* file
@@ -28,6 +29,10 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\DataChecker:
         arguments: ["@doctrine.orm.entity_manager","%require_images_to_promote_car%"]
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%photos_directory%'
 
     app.menu_builder:
         class: App\AppBundle\Menu\MenuBuilder

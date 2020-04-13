@@ -1,14 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Manage Cars{% endblock %}
 
 {% block body %}
-    <h1>Car index</h1>
+    <h1>Manage Cars</h1>
 
-    <table class="table">
+    <table class="table table-bordered dataTable">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Name</th>
                 <th>Price</th>
                 <th>Year</th>
                 <th>Navigation</th>
@@ -21,11 +22,14 @@
         {% for car in cars %}
             <tr>
                 <td>{{ car.id }}</td>
+                <td>{{ car.vendor.name }} {{ car.model.name }}</td>
                 <td>{{ car.price }}</td>
                 <td>{{ car.year }}</td>
                 <td>{{ car.navigation ? 'Yes' : 'No' }}</td>
                 <td>{{ car.description }}</td>
-                <td><span class="glyphicon glyphicon-{% if car.promote  %}ok-circle {% else %}ban-circle{% endif %}"></span></td>
+                <td>
+                    <span class="glyphicon glyphicon-{% if car.promote  %}ok-circle {% else %}ban-circle{% endif %}"></span>
+                </td>
                 <td>
                     <a href="{{ path('car_show', {'id': car.id}) }}">show</a>
                     <a href="{{ path('car_edit', {'id': car.id}) }}">edit</a>
@@ -40,5 +44,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('car_new') }}">Create new</a>
+    <a href="{{ path('car_new') }}" class="btn btn-secondary">Create new</a>
 {% endblock %}

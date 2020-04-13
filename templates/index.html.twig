@@ -38,6 +38,11 @@
                                                     {{ car.vendor.name }} {{ car.model.name }}
                                                 </a>
                                             </h4>
+                                            <a href="{{ url('show_car', {id: car.id}) }}">
+                                                <img src="{{ asset('uploads/car/' ~ car.image) }}"
+                                                     alt=""
+                                                     style="max-width: 100%;">
+                                            </a>
                                         </div>
                                         <p class="card-text"></p>
                                     </div>

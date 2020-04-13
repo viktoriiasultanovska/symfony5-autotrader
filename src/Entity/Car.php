@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CarRepository")
@@ -54,6 +55,13 @@ class Car
      * @ORM\Column(type="boolean")
      */
     private $promote;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/jpg", "image/png" })
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -155,9 +163,20 @@ class Car
         return $this->promote;
     }
 
-
     public function setPromote($promote)
     {
         $this->promote = $promote;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

@@ -1,10 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Edit Car{% endblock %}
 
 {% block body %}
     <h1>Edit Car</h1>
-
+    <img src="{{ asset('uploads/car/' ~ image) }}"
+         alt="{{ car.vendor.name }} {{ car.model.name }}"
+         style="max-width: 250px;" />
     {{ include('car/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('car_index') }}">back to list</a>

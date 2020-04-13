@@ -6,6 +6,7 @@ use App\Entity\Car;
 use App\Form\CarType;
 use App\Repository\CarRepository;
 use App\Service\DataChecker;
+use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,20 +19,25 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CarController extends AbstractController
 {
-
     /**
      * @var DataChecker
      */
     private $dataChecker;
+    /**
+     * @var FileUploader
+     */
+    private $fileUploader;
 
     /**
      * CarController constructor.
      *
      * @param DataChecker $dataChecker
+     * @param FileUploader $fileUploader
      */
-    public function __construct(DataChecker $dataChecker)
+    public function __construct(DataChecker $dataChecker,FileUploader $fileUploader)
     {
         $this->dataChecker = $dataChecker;
+        $this->fileUploader = $fileUploader;
     }
     /**
      * @Route("/", name="car_index", methods={"GET"})
@@ -81,6 +87,12 @@ class CarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form['image']->getData();
+            if ($imageFile) {
+                $imageFileName = $this->fileUploader->upload($imageFile);
+                $car->setImage($imageFileName);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($car);
             $entityManager->flush();
@@ -120,6 +132,12 @@ class CarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form['image']->getData();
+            if ($imageFile) {
+                $imageFileName = $this->fileUploader->upload($imageFile);
+                $car->setImage($imageFileName);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('car_index');
@@ -128,6 +146,7 @@ class CarController extends AbstractController
         return $this->render('car/edit.html.twig', [
             'car'  => $car,
             'form' => $form->createView(),
+            'image' => $car->getImage()
         ]);
     }
 
