@@ -2,41 +2,52 @@
 
 {% block title %} The Best Cars in the Internet! {% endblock %}
 {% block body %}
-    <div id="wrapper">
-        <div id="container" class="container">
-            <div id="welcome">
-                <div class="container">
-                    <h1>Offer</h1>
-                    <div class="col-sm-12">
-                        <div class="float-right">
-                            {{ form_start(form, { attr: {class: 'form-inline'} } ) }}
-                            {{ form_widget(form.search, { attr: {placeholder: 'Search'} }  ) }}
-                            <button type="submit" class="btn btn-primary">Search</button>
-                            {{ form_errors(form.search) }}
-                            {{ form_end(form) }}
+    <section class="section-sm">
+        <div class="container">
+            <h1>Offer</h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="category-search-filter">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-8">
+                                <div class="form-row">
+                                    {{ form_start(form, { attr: {class: 'form-inline'} } ) }}
+                                    {{ form_errors(form.search) }}
+                                    <div class="form-group">
+                                        {{ form_widget(form.search, { attr: {placeholder: 'Search'} }  ) }}
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
                         </div>
-                        <table class="table">
-                            <thead>
-                            <th>Vendor</th>
-                            <th>Name</th>
-                            <th>Actions</th>
-                            </thead>
-                            <tbody>
-                            {% for car in cars %}
-                                <tr>
-                                    <td>{{ car.vendor.name }}</td>
-                                    <td>{{ car.model.name }}</td>
-                                    <td><a href="{{ url('show_car', {id: car.id}) }}">Show Details</a></td>
-                                </tr>
-                            {% endfor %}
-
-                            </tbody>
-                        </table>
                     </div>
+                    <div class="product-grid-list">
+                        {% for car in cars %}
+                            <div class="col-sm-12 col-lg-4 col-md-6">
+                                <div class="product-item bg-ligt">
+                                    <div class="card">
+                                        <div class="thumb-content">
 
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                <a href="{{ url('show_car', {id: car.id}) }}">
+                                                    {{ car.vendor.name }} {{ car.model.name }}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <p class="card-text"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
 
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}
