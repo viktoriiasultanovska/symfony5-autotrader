@@ -41,7 +41,7 @@ class DataChecker
     public function checkCar(Car $car)
     {
         $promote = true;
-        if ($this->requireImagesToPromoteCar) {
+        if ($this->requireImagesToPromoteCar && !$car->getImage()) {
             $promote = false;
         }
         $car->setPromote($promote);

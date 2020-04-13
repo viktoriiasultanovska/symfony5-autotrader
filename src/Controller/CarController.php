@@ -142,6 +142,8 @@ class CarController extends AbstractController
                 $car->setImage($imageFileName);
             } elseif ($car->getImage()) {
                 $car->setImage($car->getImage());
+            } else {
+                $car->setImage('');
             }
 
             $this->getDoctrine()->getManager()->flush();
