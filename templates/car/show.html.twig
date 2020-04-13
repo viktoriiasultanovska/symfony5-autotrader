@@ -3,38 +3,51 @@
 {% block title %}{{ car.vendor.name }} {{ car.model.name }}{% endblock %}
 
 {% block body %}
-    <h1>{{ car.vendor.name }} {{ car.model.name }}</h1>
-
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ car.id }}</td>
-        </tr>
-        <tr>
-            <th>Price</th>
-            <td>{{ car.price }}</td>
-        </tr>
-        <tr>
-            <th>Year</th>
-            <td>{{ car.year }}</td>
-        </tr>
-        <tr>
-            <th>Navigation</th>
-            <td>{{ car.navigation ? 'Yes' : 'No' }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ car.description }}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('car_index') }}">back to list</a>
-
-    <a href="{{ path('car_edit', {'id': car.id}) }}">edit</a>
-
-    {{ include('car/_delete_form.html.twig') }}
-
-    <img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" style="max-width: 400px;">
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+            <div class="sidebar">
+                <img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" style="max-width: 400px;">
+            </div>
+        </div>
+        <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+            <h1>{{ car.vendor.name }} {{ car.model.name }}</h1>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ car.id }}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{ car.price }}</td>
+                </tr>
+                <tr>
+                    <th>Year</th>
+                    <td>{{ car.year }}</td>
+                </tr>
+                <tr>
+                    <th>Navigation</th>
+                    <td>{{ car.navigation ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ car.description }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
+            <div class="col-md-6">
+                <a href="{{ path('car_index') }}" class="btn btn-transparent">back to list</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ path('car_edit', {'id': car.id}) }}" class="btn btn-primary">edit</a>
+            </div>
+            <div class="col-md-3">
+                {{ include('car/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

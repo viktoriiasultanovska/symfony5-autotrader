@@ -3,54 +3,80 @@
 {% block title %}Manage Cars{% endblock %}
 
 {% block body %}
-    <h1>Manage Cars</h1>
-
-    <table class="table table-bordered dataTable">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Year</th>
-                <th>Navigation</th>
-                <th>Description</th>
-                <th>Promoted</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for car in cars %}
-            <tr>
-                <td>{{ car.id }}</td>
-                <td>
-                    {% if car.image %}
-                        <img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" style="max-width: 200px;">
+    <div class="row">
+        <div class="col-md-16">
+            <div class="widget dashboard-container my-adslist">
+                <h3 class="widget-header">Manage Cars</h3>
+                <table class="table table-responsive product-dashboard-table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Image</th>
+                        <th class="text-center">Name</th>
+                        <th>Price</th>
+                        <th>Year</th>
+                        <th class="text-center">Navigation</th>
+                        <th>Description</th>
+                        <th class="text-center">Promoted</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for car in cars %}
+                        <tr>
+                            <td>{{ car.id }}</td>
+                            <td class="product-thumb">
+                                {% if car.image %}
+                                    <img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" style="max-width: 200px;">
+                                {% else %}
+                                    <img src="{{ asset('image/vehicle-placeholder.png') }}" alt="" style="max-width: 200px;">
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                <h3 class="title">{{ car.vendor.name }} {{ car.model.name }}</h3>
+                            </td>
+                            <td>{{ car.price }}</td>
+                            <td>{{ car.year }}</td>
+                            <td class="text-center">{{ car.navigation ? 'Yes' : 'No' }}</td>
+                            <td>{{ car.description }}</td>
+                            <td class="text-center">
+                                <span class="glyphicon glyphicon-{% if car.promote  %}ok-circle {% else %}ban-circle{% endif %}"></span>
+                            </td>
+                            <td class="action" data-title="Action">
+                                <div>
+                                    <ul class="list-inline justify-content-center">
+                                        <li class="list-inline-item">
+                                            <a href="{{ path('car_show', {'id': car.id}) }}"
+                                               data-toggle="tooltip" data-placement="top"
+                                               class="view"
+                                               data-original-title="view"><i class="glyphicon glyphicon-eye-open"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="{{ path('car_edit', {'id': car.id}) }}"
+                                               data-toggle="tooltip" data-placement="top"
+                                               class="edit"
+                                               data-original-title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="{{ path('car_promote', {'id': car.id}) }}"
+                                               data-toggle="tooltip" data-placement="top"
+                                               class="delete"
+                                               data-original-title="promote"><i class="glyphicon glyphicon-arrow-up"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
                     {% else %}
-                        <img src="{{ asset('image/vehicle-placeholder.png') }}" alt="" style="max-width: 200px;">
-                    {% endif %}
-                </td>
-                <td>{{ car.vendor.name }} {{ car.model.name }}</td>
-                <td>{{ car.price }}</td>
-                <td>{{ car.year }}</td>
-                <td>{{ car.navigation ? 'Yes' : 'No' }}</td>
-                <td>{{ car.description }}</td>
-                <td>
-                    <span class="glyphicon glyphicon-{% if car.promote  %}ok-circle {% else %}ban-circle{% endif %}"></span>
-                </td>
-                <td>
-                    <a href="{{ path('car_show', {'id': car.id}) }}">show</a>
-                    <a href="{{ path('car_edit', {'id': car.id}) }}">edit</a>
-                    <a href="{{ path('car_promote', {'id': car.id}) }}">promote</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-    <a href="{{ path('car_new') }}" class="btn btn-secondary">Create new</a>
+                <a href="{{ path('car_new') }}" class="btn btn-secondary">Create new</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
