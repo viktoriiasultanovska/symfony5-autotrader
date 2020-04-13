@@ -4,7 +4,6 @@
 {% block body %}
     <section class="section-sm">
         <div class="container">
-            <h1>Offer</h1>
             <div class="row">
                 <div class="col-md-12">
                     <div class="category-search-filter">
@@ -24,34 +23,40 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-grid-list">
-                        {% for car in cars %}
-                            <div class="col-sm-12 col-lg-4 col-md-6">
-                                <div class="product-item bg-ligt">
-                                    <div class="card">
-                                        <div class="thumb-content">
-
+                    <!-- ad listing list  -->
+                    {% for car in cars %}
+                        <div class="ad-listing-list mt-20">
+                            <div class="row p-lg-3 p-sm-5 p-4">
+                                <div class="row p-lg-3 p-sm-5 p-4">
+                                    <div class="col-lg-4 align-self-center">
+                                        <a href="{{ url('show_car', {id: car.id}) }}">
+                                            <img src="{{ asset('uploads/car/' ~ car.image) }}"
+                                                 alt="{{ car.vendor.name }} {{ car.model.name }}"
+                                                 style="max-width: 244px;"
+                                                 class="img-fluid"/>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="ad-listing-content">
+                                                    <h4>
+                                                        <a href="{{ url('show_car', {id: car.id}) }}" class="font-weight-bold">{{ car.vendor.name }} {{ car.model.name }}</a>
+                                                    </h4>
+                                                    <ul class="list-inline mt-2 mb-3">
+                                                        <li class="list-inline-item"><span class="glyphicon glyphicon-{% if car.navigation  %}ok-circle {% else %}ban-circle{% endif %}">Navigation</span></li>
+                                                    </ul>
+                                                    <p class="pr-5">{{ car.description }}</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            <h4 class="card-title">
-                                                <a href="{{ url('show_car', {id: car.id}) }}">
-                                                    {{ car.vendor.name }} {{ car.model.name }}
-                                                </a>
-                                            </h4>
-                                            <a href="{{ url('show_car', {id: car.id}) }}">
-                                                <img src="{{ asset('uploads/car/' ~ car.image) }}"
-                                                     alt=""
-                                                     style="max-width: 100%;">
-                                            </a>
-                                        </div>
-                                        <p class="card-text"></p>
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
+                    <!-- ad listing list  -->
                 </div>
-
             </div>
         </div>
     </section>

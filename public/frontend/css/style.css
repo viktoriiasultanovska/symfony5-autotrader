@@ -1288,12 +1288,12 @@ ul.pagination .active a {
 
 .category-block .header .icon-bg-1 {
   background: #ccdb38;
-  box-shadow: 0 0 0px 4px rgba(204, 219, 56, 0.35);
+  box-shadow: 0 0 0 4px rgba(204, 219, 56, 0.35);
 }
 
 .category-block .header .icon-bg-2 {
   background: #a676b8;
-  box-shadow: 0 0 0px 4px rgba(166, 118, 184, 0.35);
+  box-shadow: 0 0 0 4px rgba(166, 118, 184, 0.35);
 }
 
 .category-block .header .icon-bg-3 {

@@ -2,15 +2,29 @@
 
 {% block title %} The Best Cars in the Internet! {% endblock %}
 {% block body %}
-    <div id="wrapper">
-        <div id="container" class="container">
-            <div id="welcome">
-                <h1>{{ car.model.name }}</h1>
-                <p>{{ car.vendor.name }}</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="product-slider slick-initialized slick-slider slick-dotted">
+                    {% if car.image %}
+                        <img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" style="max-width: 200px;">
+                    {% else %}
+                        <img src="{{ asset('image/vehicle-placeholder.png') }}" alt="" style="max-width: 200px;">
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="product-details">
+                    <div class="product-title">
+                        {{ car.vendor.name }} {{ car.model.name }}
+                    </div>
+                </div>
                 <p>{{ car.price }}</p>
                 <p>{{ car.year }}</p>
+
+                <a href="{{ url('offer') }}">Back</a>
             </div>
-            <a href="{{ url('offer') }}">Back</a>
         </div>
     </div>
 {% endblock %}
