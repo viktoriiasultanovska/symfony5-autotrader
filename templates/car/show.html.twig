@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
             <div class="col-md-6">
-                <a href="{{ path('car_index') }}" class="btn btn-transparent">back to list</a>
+                {{ include('car/_back_to_list.html.twig') }}
             </div>
             <div class="col-md-4">
                 <a href="{{ path('car_edit', {'id': car.id}) }}" class="btn btn-primary">edit</a>
