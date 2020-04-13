@@ -4,10 +4,22 @@
 
 {% block body %}
     <h1>Edit Car</h1>
-    <img src="{{ asset('uploads/car/' ~ image) }}"
-         alt="{{ car.vendor.name }} {{ car.model.name }}"
-         style="max-width: 250px;" />
-    {{ include('car/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="row">
+        <div class="col-md-3">
+            {% if car.image %}
+                <img src="{{ asset('uploads/car/' ~ image) }}"
+                     alt="{{ car.vendor.name }} {{ car.model.name }}"
+                     style="max-width: 250px;" />
+            {% else %}
+                <img src="{{ asset('image/vehicle-placeholder.png') }}"
+                     alt="{{ car.vendor.name }} {{ car.model.name }}"
+                     style="max-width: 250px;" />
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            {{ include('car/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+    </div>
 
     <a href="{{ path('car_index') }}">back to list</a>
 

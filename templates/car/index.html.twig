@@ -23,7 +23,13 @@
         {% for car in cars %}
             <tr>
                 <td>{{ car.id }}</td>
-                <td><img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" style="max-width: 200px;"></td>
+                <td>
+                    {% if car.image %}
+                        <img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" style="max-width: 200px;">
+                    {% else %}
+                        <img src="{{ asset('image/vehicle-placeholder.png') }}" alt="" style="max-width: 200px;">
+                    {% endif %}
+                </td>
                 <td>{{ car.vendor.name }} {{ car.model.name }}</td>
                 <td>{{ car.price }}</td>
                 <td>{{ car.year }}</td>

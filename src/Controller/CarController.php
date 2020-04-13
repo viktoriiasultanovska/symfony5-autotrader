@@ -93,6 +93,8 @@ class CarController extends AbstractController
             if ($imageFile) {
                 $imageFileName = $this->fileUploader->upload($imageFile);
                 $car->setImage($imageFileName);
+            } else {
+                $car->setImage('');
             }
 
             $entityManager = $this->getDoctrine()->getManager();

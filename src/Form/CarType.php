@@ -37,7 +37,7 @@ class CarType extends AbstractType
                     'data_class' => null,
                     // make it optional so you don't have to re-upload the image file
                     // every time you edit the Car details
-                    'required' => false,
+                    'required' => true,
                 ]
             )
             ->add(
