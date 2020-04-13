@@ -34,8 +34,10 @@ class CarController extends AbstractController
      * @param DataChecker $dataChecker
      * @param FileUploader $fileUploader
      */
-    public function __construct(DataChecker $dataChecker,FileUploader $fileUploader)
-    {
+    public function __construct(
+        DataChecker $dataChecker,
+        FileUploader $fileUploader
+    ) {
         $this->dataChecker = $dataChecker;
         $this->fileUploader = $fileUploader;
     }
@@ -87,7 +89,7 @@ class CarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form['image']->getData();
+            $imageFile = $form['image_file']->getData();
             if ($imageFile) {
                 $imageFileName = $this->fileUploader->upload($imageFile);
                 $car->setImage($imageFileName);
@@ -132,20 +134,25 @@ class CarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form['image']->getData();
+            $imageFile = $form['image_file']->getData();
             if ($imageFile) {
                 $imageFileName = $this->fileUploader->upload($imageFile);
                 $car->setImage($imageFileName);
+            } elseif ($car->getImage()) {
+                $car->setImage($car->getImage());
             }
 
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('car_index');
         }
+        if (!$form->isSubmitted()) {
+            $car->setImage($car->getImage());
+        }
 
         return $this->render('car/edit.html.twig', [
-            'car'  => $car,
-            'form' => $form->createView(),
+            'car'   => $car,
+            'form'  => $form->createView(),
             'image' => $car->getImage()
         ]);
     }

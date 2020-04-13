@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Car;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,6 @@ class CarType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        dump($options['data']->getImage());
         $builder
             ->add('price')
             ->add('year')
@@ -32,13 +32,21 @@ class CarType extends AbstractType
             ->add('promote')
             ->add(
                 'image',
-                FileType::class,
+                HiddenType::class,
                 [
-                    'label' => 'Photo (png, jpeg)',
                     'data_class' => null,
                     // make it optional so you don't have to re-upload the image file
                     // every time you edit the Car details
                     'required' => false,
+                ]
+            )
+            ->add(
+                'image_file',
+                FileType::class,
+                [
+                    'label' => 'Photo (png, jpeg)',
+                    'mapped' => false,
+                    'required' => false
                 ]
             );
     }
