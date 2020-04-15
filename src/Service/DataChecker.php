@@ -14,9 +14,7 @@ class DataChecker
     /** var bool */
     private $requireImagesToPromoteCar;
 
-    /**
-     * @var EntityManager
-     */
+    /** @var EntityManager */
     private $entityManager;
 
     /**

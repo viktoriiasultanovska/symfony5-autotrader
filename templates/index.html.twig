@@ -30,10 +30,11 @@
                                 <div class="row p-lg-3 p-sm-5 p-4">
                                     <div class="col-lg-4 align-self-center">
                                         <a href="{{ url('show_car', {id: car.id}) }}">
-                                            <img src="{{ asset('uploads/car/' ~ car.image) }}"
-                                                 alt="{{ car.vendor.name }} {{ car.model.name }}"
-                                                 style="max-width: 244px;"
-                                                 class="img-fluid"/>
+                                            {% if car.image %}
+                                                <img src="{{ asset('uploads/car/' ~ car.image) }}" alt="" class="img-fluid" style="max-width: 200px;">
+                                            {% else %}
+                                                <img src="{{ asset('image/vehicle-placeholder.png') }}" class="img-fluid" alt="" style="max-width: 200px;">
+                                            {% endif %}
                                         </a>
                                     </div>
                                     <div class="col-lg-8">
