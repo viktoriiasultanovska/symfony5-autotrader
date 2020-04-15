@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap=""
+         verbose="true"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="unit">
+            <directory suffix="Test.php">tests/unit</directory>
+        </testsuite>
+
+        <testsuite name="end-to-end">
+            <directory suffix=".phpt">tests/end-to-end</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <file>src/Framework/Assert/Functions.php</file>
+                <file>src/Util/PHP/eval-stdin.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+
+    <php>
+        <const name="PHPUNIT_TESTSUITE" value="true"/>
+        <server name="KERNEL_DIR" value="src/" />
+        <server name="KERNEL_CLASS" value="App\Kernel"/>
+        <server name="DATABASE_URL" value="mysql://autotrader:password@127.0.0.1:3306/autotrader?serverVersion=5.7" />
+    </php>
+    <logging>
+        <log type="coverage-html" target="./build/coverage" />
+        <log type="coverage-clover" target="./build/logs/clover.xml"/>
+        <log type="junit" target="./build/logs/junit.xml"/>
+        <log type="testdox-html" target="./build/logstestdox.html"/>
+    </logging>
+    <listeners>
+        <listener class="\Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+    </listeners>
+</phpunit>

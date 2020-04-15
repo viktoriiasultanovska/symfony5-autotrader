@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Unit\Service;
+namespace Tests\Unit\App\Service;
 
-use App\Entity\Car as Car;
-use App\Service\DataChecker as DataChecker;
-use Doctrine\ORM\EntityManager as EntityManager;
+use App\Entity\Car;
+use App\Service\DataChecker;
+use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -23,11 +23,13 @@ class DataCheckerTest extends TestCase
     public function setUp()
     {
         $this->entityManager = $this->getMockBuilder(EntityManager::class)
-        ->disableOriginalConstructor()->getMock();
-        $this->car = $this->getMockBuilder(Car::class)->disableOriginalConstructor()
+            ->disableOriginalConstructor()->getMock();
+        $this->car = $this->getMockBuilder(Car::class)
+            ->disableOriginalConstructor()
             ->getMock();
 
     }
+
     public function testCheckCarWithRequiredPhotosWillReturnFalse()
     {
         $subject = new DataChecker($this->entityManager, true);
