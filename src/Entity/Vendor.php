@@ -35,7 +35,7 @@ class Vendor
      */
     public function __construct()
     {
-        $this->cars = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->cars = new ArrayCollection();
     }
 
 
